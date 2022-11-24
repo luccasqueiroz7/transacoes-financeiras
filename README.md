@@ -1,6 +1,6 @@
 # CNAB Transactions
 
-A aplicação consiste em parsear arquivo de texto(CNAB) e salvar suas informações(transações financeiras) em uma base de dados a critério do candidato.
+A aplicação consiste em parsear arquivo de texto(CNAB) e salvar suas informações (transações financeiras) em uma base de dados a critério do candidato.
 Esta aplicação foi feita em python, utilizando do Django como framework.
 
 # Instruções de configuração:

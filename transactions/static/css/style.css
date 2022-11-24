@@ -1,0 +1,127 @@
+body {
+    background-color: aliceblue;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+    gap: 50px;
+}
+
+h1 {
+    font-size: 40px;
+    color: rgb(16, 83, 207);
+    padding: 5px;
+    text-decoration: underline;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(135, 176, 252);
+    gap: 15px;
+    padding: 50px 40px 40px 40px;
+    width: 400px;
+    max-width: 90vw;
+    border-radius: 20px;
+}
+
+form>input::file-selector-button {
+    background-color: rgb(16, 83, 207);
+    color: white;
+    padding: 15px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+#uploadedFile {
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+}
+
+form>input::file-selector-button:hover {
+    color: #ffbf00;
+}
+
+#uploadedFile:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: rgb(16, 83, 207);
+}
+
+#submitFile {
+    border: 1px solid rgb(16, 83, 207);
+    border-radius: 10px;
+    background-color: rgb(16, 83, 207);
+    padding: 15px 5px;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+}
+
+#submitFile:hover {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    color: #ffbf00;
+}
+
+a {
+    color: rgb(104, 104, 104);
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+    color: rgb(16, 83, 207);
+}
+
+.alert {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: fit-content;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 10px;
+    white-space: nowrap;
+    animation: show 8s linear forwards;
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes show {
+    0% {
+        transform: translateX(100%);
+    }
+
+    10%,
+    80% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.ms {
+    width: 100%;
+    margin: auto;
+    padding: 1em;
+    float: left;
+    display: block;
+    margin-bottom: 10px;
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-weight: 100;
+    font-size: 16px;
+}
+
+.error {
+    background-color: #FFCACA;
+    border: 2px #a60202 solid;
+    color: #a60202;
+    border-radius: 5px;
+}
