@@ -97,6 +97,53 @@
             text-decoration: underline;
             color: rgb(16, 83, 207);
         }
+
+        .alert {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: fit-content;
+            overflow: hidden;
+            margin: 0 auto;
+            padding: 10px;
+            white-space: nowrap;
+            animation: show 8s linear forwards;
+            animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes show {
+            0% {
+                transform: translateX(100%);
+            }
+
+            10%,
+            80% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(100%);
+            }
+        }
+
+        .ms {
+            width: 100%;
+            margin: auto;
+            padding: 1em;
+            float: left;
+            display: block;
+            margin-bottom: 10px;
+            font-family: Verdana, Arial, Helvetica, sans-serif;
+            font-weight: 100;
+            font-size: 16px;
+        }
+
+        .error {
+            background-color: #FFCACA;
+            border: 2px #a60202 solid;
+            color: #a60202;
+            border-radius: 5px;
+        }
     </style>
 </head>
 
@@ -109,7 +156,15 @@
             <input type="submit" value="Enviar arquivo" id="submitFile">
             <a href="/api/transactions/" target="_blank">Transações</a>
         </form>
-
+        {% if messages %}
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            <span class="ms error">
+                {{ message }}
+            </span>
+        </div>
+        {% endfor %}
+        {% endif %}
     </main>
 </body>
 

@@ -3,8 +3,7 @@ from .models import Transaction
 from rest_framework.views import APIView, status
 from rest_framework.response import Response
 from django.forms import model_to_dict
-
-from django.http import HttpResponseRedirect, HttpResponsePermanentRedirect
+from django.contrib import messages
 
 
 class TransactionView(APIView):
@@ -20,7 +19,7 @@ class TransactionView(APIView):
             else:
                 total_value += transaction["value"]
 
-        transactions_dict.append({"total_value": f"R$ {total_value}"})
+        transactions_dict.append({"total_value": f"R$ {total_value},00"})
 
         return Response(transactions_dict, status.HTTP_200_OK)
 
@@ -28,22 +27,25 @@ class TransactionView(APIView):
 def form(request):
 
     if request.method == "POST":
+        try:
+            uploadedFile = request.FILES["uploadedFile"]
 
-        uploadedFile = request.FILES["uploadedFile"]
+            destination = open("transactions.txt", "wb+")
+            for chunk in uploadedFile.chunks():
+                destination.write(chunk)
+            destination.close()
 
-        destination = open("transactions.txt", "wb+")
-        for chunk in uploadedFile.chunks():
-            destination.write(chunk)
-        destination.close()
+            file = open("transactions.txt", encoding="utf-8")
+            transactions = file.readlines()
+            for transaction in transactions:
+                transactionDict = read_transaction(transaction)
+                Transaction.objects.create(**transactionDict)
+            file.close()
 
-        file = open("transactions.txt", encoding="utf-8")
-        transactions = file.readlines()
-        for transaction in transactions:
-            transactionDict = read_transaction(transaction)
-            Transaction.objects.create(**transactionDict)
-        file.close()
+            return redirect("/api/transactions/")
 
-        return redirect("/api/transactions/")
+        except Exception:
+            messages.error(request, "Adicione um arquivo")
 
     return render(request, "form/index.html")
 
